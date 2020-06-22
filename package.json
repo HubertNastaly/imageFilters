@@ -23,7 +23,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-dev-server --mode development",
+    "dev": "webpack-dev-server --mode development --host localhost --port 3000 --content-base src --inline --hot",
     "build": "webpack --mode production"
   },
   "repository": {
