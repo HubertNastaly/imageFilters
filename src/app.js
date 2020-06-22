@@ -9,7 +9,7 @@ function createRenderer() {
   //const imageUrl = "https://lh3.googleusercontent.com/proxy/t_Spyu5VdbCJ7SpstUNJdh-Ul2_e2csIkZ4fdRho8aSoV_uAKmPuxXEw_s1_Ct9b1Z1jbnMT645JaxElee91BhBeTMyluvEPoBsKZBczKaRvTisLqiGog5M9eJOrf2OIMIeMe8AK"
   const sprite = PIXI.Sprite.from(imageUrl)
   pixiApp.stage.addChild(sprite);
-  sprite.filters = [Filters.boxBlurFilter()]
+  sprite.filters = [Filters.gaussianBlurFilter()]
 }
 
 createRenderer()
