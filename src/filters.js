@@ -4,7 +4,13 @@ import { boxBlurFragmentShader } from "./shaders/boxBlur"
 import { gaussianBlurFragmentShader } from "./shaders/gaussianBlur"
 import * as Constants from "./constants"
 
-export function invertFilter() {
+export const filterCollection = {
+  "Invert": invertFilter,
+  "Box blur": boxBlurFilter,
+  "Gaussian blur": gaussianBlurFilter
+}
+
+function invertFilter() {
   const uniforms = {}
   return new PIXI.Filter(
     PIXI.Filter.defaultVertexSrc,
@@ -13,7 +19,7 @@ export function invertFilter() {
   );
 }
 
-export function boxBlurFilter() {
+function boxBlurFilter() {
   const uniforms = {}
   uniforms.offset = new Float32Array(
     [-1.0, -1.0, 0.0, -1.0, 1.0, -1.0,
@@ -28,7 +34,7 @@ export function boxBlurFilter() {
   );
 }
 
-export function gaussianBlurFilter() {
+function gaussianBlurFilter() {
   const uniforms = {}
   uniforms.offset = new Float32Array(
     [-2.0, -2.0, -1.0, -2.0, 0.0, -2.0, 1.0, -2.0, 2.0, -2.0,

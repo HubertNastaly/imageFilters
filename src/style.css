@@ -1,0 +1,58 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+html{
+  height: 100%;
+}
+
+body{
+  background-color: whitesmoke;
+  height: 100%;
+}
+
+h4{
+  color: white;
+  text-shadow: 0 0 5px black;
+}
+
+.filterButton{
+  background-color: tomato;
+  border-radius: 10px;
+  border-style: none;
+  height: 80px;
+  width: 100%;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.sidebar{
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  height: 100%;
+  width: 90%;
+  max-width: 200px;
+  background-color: white;
+  overflow-x: hidden;
+  padding: 20px;
+}
+
+.mainContainer{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: auto 0;
+}
+
+.workspace{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
