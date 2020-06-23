@@ -9,7 +9,7 @@ function renderer(imageUrl) {
   //const imageUrl = "https://lh3.googleusercontent.com/proxy/t_Spyu5VdbCJ7SpstUNJdh-Ul2_e2csIkZ4fdRho8aSoV_uAKmPuxXEw_s1_Ct9b1Z1jbnMT645JaxElee91BhBeTMyluvEPoBsKZBczKaRvTisLqiGog5M9eJOrf2OIMIeMe8AK"
   renderer.sprite = PIXI.Sprite.from(imageUrl)
   pixiApp.stage.addChild(renderer.sprite)
-  renderer.sprite.filters = [Filters['Invert']()]
+  renderer.sprite.filters = []
   return pixiApp.view
 }
 
@@ -28,6 +28,16 @@ function splitSidebarAndWorkspace() {
   mainContainer.appendChild(sidebar)
   mainContainer.appendChild(workspace)
 
+  const title = document.createElement("h4")
+  title.textContent = "Reset"
+  const button = document.createElement("button")
+  button.classList.add("filterButton", "resetFiltersButton")
+  button.appendChild(title)
+  button.addEventListener("click", () => {
+    renderer.sprite.filters = []
+  })
+  sidebar.appendChild(button)
+
   Object.keys(Filters).forEach(filterName => {
     const title = document.createElement("h4")
     title.textContent = filterName
@@ -36,7 +46,7 @@ function splitSidebarAndWorkspace() {
     button.classList.add("filterButton")
     button.appendChild(title)
     button.addEventListener("click", () => {
-      renderer.sprite.filters = [Filters[filterName]()]
+      renderer.sprite.filters.push(Filters[filterName]())
     })
 
     sidebar.appendChild(button)

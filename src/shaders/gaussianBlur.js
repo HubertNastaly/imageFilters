@@ -12,7 +12,6 @@ uniform vec2 offset[25];
 uniform float weights[25];
 uniform vec2 dimensions;
 void main(void) {
-  float divider;
   vec2 sampleCoord;
   vec4 color = vec4(0.0);
   for(int i = 0; i < 25; ++i){

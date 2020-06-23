@@ -25,6 +25,16 @@ h4{
   width: 100%;
   margin-bottom: 10px;
   cursor: pointer;
+  transform: scale(100%);
+  transition: all 0.1s ease-out;
+}
+
+.resetFiltersButton{
+  background-color: yellowgreen;
+}
+
+.filterButton:hover{
+  transform: scale(90%);
 }
 
 .sidebar{
