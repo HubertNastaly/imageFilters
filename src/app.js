@@ -2,22 +2,22 @@ import "./style.css"
 import * as PIXI from "pixi.js"
 import { filterCollection as Filters } from "./filters.js"
 //import * as Constants from "./constants.js"
-import { WorkSheet } from "./WorkSheet"
+import WorkSheet from "./WorkSheet"
 
-function renderer(imageUrl) {
+// function renderer(imageUrl) {
 
-  const pixiApp = new PIXI.Application({ width: 400, height: 400, backgroundColor: 0x000000 })
-  pixiApp.loader.add("image", imageUrl)
-  pixiApp.loader.onComplete.add(() => {
-    renderer.sprite = PIXI.Sprite.from(pixiApp.loader.resources.image.texture)
-    pixiApp.renderer.resize(renderer.sprite.width - 1, renderer.sprite.height)
-    pixiApp.stage.addChild(renderer.sprite)
-    renderer.sprite.filters = []
-  })
-  pixiApp.loader.load()
+//   const pixiApp = new PIXI.Application({ backgroundColor: 0x000000 })
+//   pixiApp.loader.add("image", imageUrl)
+//   pixiApp.loader.onComplete.add(() => {
+//     renderer.sprite = PIXI.Sprite.from(pixiApp.loader.resources.image.texture)
+//     pixiApp.renderer.resize(renderer.sprite.width - 1, renderer.sprite.height)
+//     pixiApp.stage.addChild(renderer.sprite)
+//     renderer.sprite.filters = []
+//   })
+//   pixiApp.loader.load()
 
-  return pixiApp.view
-}
+//   return pixiApp.view
+// }
 
 function fileMenu() {
   const menu = document.createElement("div")
@@ -36,7 +36,7 @@ function filterList() {
   button.classList.add("filterButton", "resetFiltersButton")
   button.appendChild(title)
   button.addEventListener("click", () => {
-    renderer.sprite.filters = []
+    WorkSheet.sprite.filters = []
   })
   filterList.appendChild(button)
 
@@ -48,7 +48,7 @@ function filterList() {
     button.classList.add("filterButton")
     button.appendChild(title)
     button.addEventListener("click", () => {
-      renderer.sprite.filters.push(Filters[filterName]())
+      WorkSheet.sprite.filters.push(Filters[filterName]())
     })
 
     filterList.appendChild(button)
@@ -65,10 +65,10 @@ function sidebar() {
 }
 
 function splitSidebarAndWorkspace() {
-  //const image = WorkSheet.getInstance("https://www.syfy.com/sites/syfy/files/styles/1200x680_hero/public/2020/01/gandalf.jpg");
-  //const image = WorkSheet.getInstance("https://gra.fm/pliki/2020/03/article.jpg");
   const imageUrl = "https://cors-anywhere.herokuapp.com/https://www.arimr.gov.pl/typo3temp/_processed_/csm_mlody_las_Fotolia_437093127c.jpg"
   //const imageUrl = "https://cors-anywhere.herokuapp.com/https://www.syfy.com/sites/syfy/files/styles/1200x680_hero/public/2020/01/gandalf.jpg"
+
+  WorkSheet.loadImage(imageUrl)
 
   const mainContainer = document.createElement("div")
   mainContainer.classList.add("mainContainer")
@@ -77,7 +77,7 @@ function splitSidebarAndWorkspace() {
 
   const workspace = document.createElement("div")
   workspace.classList.add("workspace")
-  workspace.appendChild(renderer(imageUrl))
+  workspace.appendChild(WorkSheet.getView())
 
   mainContainer.appendChild(side)
   mainContainer.appendChild(workspace)

@@ -7,6 +7,7 @@ import { edgeDetectionFragmentShader } from "./shaders/edgeDetection"
 import { posterizeFragmentShader } from "./shaders/posterize"
 import { gradientMapFragmentShader } from "./shaders/gradientMap"
 import * as Constants from "./constants"
+import WorkSheet from "./WorkSheet"
 
 export const filterCollection = {
   "Invert": invertFilter,
@@ -34,7 +35,7 @@ function boxBlurFilter() {
     -1.0, 0.0, 0.0, 0.0, 1.0, 0.0,
     -1.0, 1.0, 0.0, 1.0, 1.0, 1.0]
   )
-  uniforms.dimensions = new Float32Array([Constants.RENDERER_WIDTH, Constants.RENDERER_HEIGHT])
+  uniforms.dimensions = new Float32Array([WorkSheet.pixiApp.renderer.width, WorkSheet.pixiApp.renderer.height])
   return new PIXI.Filter(
     PIXI.Filter.defaultVertexSrc,
     boxBlurFragmentShader,
@@ -58,7 +59,7 @@ function gaussianBlurFilter() {
       4.0, 9.0, 12.0, 9.0, 4.0,
       2.0, 4.0, 5.0, 4.0, 2.0]
   ).map(x => x / 159.0)
-  uniforms.dimensions = new Float32Array([Constants.RENDERER_WIDTH, Constants.RENDERER_HEIGHT])
+  uniforms.dimensions = new Float32Array([WorkSheet.pixiApp.renderer.width, WorkSheet.pixiApp.renderer.height])
   return new PIXI.Filter(
     PIXI.Filter.defaultVertexSrc,
     gaussianBlurFragmentShader,
@@ -69,7 +70,7 @@ function gaussianBlurFilter() {
 function pixelateFilter() {
   const uniforms = {
     pixelDimensions: new Float32Array([10.0, 10.0]),
-    dimensions: new Float32Array([Constants.RENDERER_WIDTH, Constants.RENDERER_HEIGHT])
+    dimensions: new Float32Array([WorkSheet.pixiApp.renderer.width, WorkSheet.pixiApp.renderer.height])
   }
   return new PIXI.Filter(
     PIXI.Filter.defaultVertexSrc,
@@ -85,7 +86,7 @@ function edgeDetectionFilter() {
     -1.0, 0.0, 0.0, 0.0, 1.0, 0.0,
     -1.0, 1.0, 0.0, 1.0, 1.0, 1.0]
   )
-  uniforms.dimensions = new Float32Array([Constants.RENDERER_WIDTH, Constants.RENDERER_HEIGHT])
+  uniforms.dimensions = new Float32Array([WorkSheet.pixiApp.renderer.width, WorkSheet.pixiApp.renderer.height])
   uniforms.xSobelOperator = new Float32Array([1.0, 0.0, -1.0, 2.0, 0.0, -2.0, 1.0, 0.0, -1.0])
   uniforms.ySobelOperator = new Float32Array([1.0, 2.0, 1.0, 0.0, 0.0, 0.0, -1.0, -2.0, -1.0])
   return new PIXI.Filter(
