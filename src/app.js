@@ -1,32 +1,34 @@
 import "./style.css"
 import * as PIXI from "pixi.js"
 import { filterCollection as Filters } from "./filters.js"
-import * as Constants from "./constants.js"
+//import * as Constants from "./constants.js"
+import { WorkSheet } from "./WorkSheet"
 
 function renderer(imageUrl) {
-  const pixiApp = new PIXI.Application({ width: Constants.RENDERER_WIDTH, height: Constants.RENDERER_HEIGHT, backgroundColor: 0x000000 })
 
-  //const imageUrl = "https://lh3.googleusercontent.com/proxy/t_Spyu5VdbCJ7SpstUNJdh-Ul2_e2csIkZ4fdRho8aSoV_uAKmPuxXEw_s1_Ct9b1Z1jbnMT645JaxElee91BhBeTMyluvEPoBsKZBczKaRvTisLqiGog5M9eJOrf2OIMIeMe8AK"
-  renderer.sprite = PIXI.Sprite.from(imageUrl)
-  pixiApp.stage.addChild(renderer.sprite)
-  renderer.sprite.filters = []
+  const pixiApp = new PIXI.Application({ width: 400, height: 400, backgroundColor: 0x000000 })
+  pixiApp.loader.add("image", imageUrl)
+  pixiApp.loader.onComplete.add(() => {
+    renderer.sprite = PIXI.Sprite.from(pixiApp.loader.resources.image.texture)
+    pixiApp.renderer.resize(renderer.sprite.width - 1, renderer.sprite.height)
+    pixiApp.stage.addChild(renderer.sprite)
+    renderer.sprite.filters = []
+  })
+  pixiApp.loader.load()
+
   return pixiApp.view
 }
 
-function splitSidebarAndWorkspace() {
-  const imageUrl = "https://www.syfy.com/sites/syfy/files/styles/1200x680_hero/public/2020/01/gandalf.jpg";
+function fileMenu() {
+  const menu = document.createElement("div")
+  menu.classList.add("fileMenu")
 
-  const mainContainer = document.createElement("div")
-  mainContainer.classList.add("mainContainer")
-  const sidebar = document.createElement("div")
-  sidebar.classList.add("sidebar")
-  const workspace = document.createElement("div")
-  workspace.classList.add("workspace")
+  return menu
+}
 
-  workspace.appendChild(renderer(imageUrl))
-
-  mainContainer.appendChild(sidebar)
-  mainContainer.appendChild(workspace)
+function filterList() {
+  const filterList = document.createElement("div")
+  filterList.classList.add("filterList")
 
   const title = document.createElement("h4")
   title.textContent = "Reset"
@@ -36,7 +38,7 @@ function splitSidebarAndWorkspace() {
   button.addEventListener("click", () => {
     renderer.sprite.filters = []
   })
-  sidebar.appendChild(button)
+  filterList.appendChild(button)
 
   Object.keys(Filters).forEach(filterName => {
     const title = document.createElement("h4")
@@ -49,8 +51,37 @@ function splitSidebarAndWorkspace() {
       renderer.sprite.filters.push(Filters[filterName]())
     })
 
-    sidebar.appendChild(button)
+    filterList.appendChild(button)
   })
+  return filterList
+}
+
+function sidebar() {
+  const sidebar = document.createElement("div")
+  sidebar.classList.add("sidebar")
+  sidebar.appendChild(filterList())
+  sidebar.appendChild(fileMenu())
+  return sidebar
+}
+
+function splitSidebarAndWorkspace() {
+  //const image = WorkSheet.getInstance("https://www.syfy.com/sites/syfy/files/styles/1200x680_hero/public/2020/01/gandalf.jpg");
+  //const image = WorkSheet.getInstance("https://gra.fm/pliki/2020/03/article.jpg");
+  const imageUrl = "https://cors-anywhere.herokuapp.com/https://www.arimr.gov.pl/typo3temp/_processed_/csm_mlody_las_Fotolia_437093127c.jpg"
+  //const imageUrl = "https://cors-anywhere.herokuapp.com/https://www.syfy.com/sites/syfy/files/styles/1200x680_hero/public/2020/01/gandalf.jpg"
+
+  const mainContainer = document.createElement("div")
+  mainContainer.classList.add("mainContainer")
+
+  const side = sidebar()
+
+  const workspace = document.createElement("div")
+  workspace.classList.add("workspace")
+  workspace.appendChild(renderer(imageUrl))
+
+  mainContainer.appendChild(side)
+  mainContainer.appendChild(workspace)
+
   return mainContainer;
 }
 

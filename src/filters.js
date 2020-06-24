@@ -5,6 +5,7 @@ import { gaussianBlurFragmentShader } from "./shaders/gaussianBlur"
 import { pixelateFragmentShader } from "./shaders/pixelate"
 import { edgeDetectionFragmentShader } from "./shaders/edgeDetection"
 import { posterizeFragmentShader } from "./shaders/posterize"
+import { gradientMapFragmentShader } from "./shaders/gradientMap"
 import * as Constants from "./constants"
 
 export const filterCollection = {
@@ -13,7 +14,8 @@ export const filterCollection = {
   "Gaussian blur": gaussianBlurFilter,
   "Pixelate": pixelateFilter,
   "Edge detection": edgeDetectionFilter,
-  "Posterize": posterizeFilter
+  "Posterize": posterizeFilter,
+  "Gradient map": gradientMapFilter
 }
 
 function invertFilter() {
@@ -106,6 +108,23 @@ function posterizeFilter() {
   return new PIXI.Filter(
     PIXI.Filter.defaultVertexSrc,
     posterizeFragmentShader,
+    uniforms
+  );
+}
+
+function gradientMapFilter() {
+  const uniforms = {
+    colorA: new Float32Array([204.0, 83.0, 51.0]).map(x => x / 255.0),//#cc5333
+    colorB: new Float32Array([35.0, 7.0, 77.0]).map(x => x / 255.0),//#23074d
+    luminanceMatrix: new Float32Array([
+      0.2053, 0.7125, 0.4670,
+      1.8537, -1.2797, -0.4429,
+      -0.3655, 1.0120, -0.6104
+    ])
+  }
+  return new PIXI.Filter(
+    PIXI.Filter.defaultVertexSrc,
+    gradientMapFragmentShader,
     uniforms
   );
 }

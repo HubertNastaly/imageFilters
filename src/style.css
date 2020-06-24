@@ -8,13 +8,18 @@ html{
 }
 
 body{
-  background-color: whitesmoke;
+  background-color:  #333333;
   height: 100%;
 }
 
 h4{
   color: white;
   text-shadow: 0 0 5px black;
+}
+
+.fileMenu{
+  height: 100px;
+  flex-shrink: 0;
 }
 
 .filterButton{
@@ -24,6 +29,7 @@ h4{
   height: 80px;
   width: 100%;
   margin-bottom: 10px;
+  flex-shrink: 0;
   cursor: pointer;
   transform: scale(100%);
   transition: all 0.1s ease-out;
@@ -37,16 +43,23 @@ h4{
   transform: scale(90%);
 }
 
+.filterList{
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
 .sidebar{
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;
   box-sizing: border-box;
   height: 100%;
   width: 90%;
-  max-width: 200px;
-  background-color: white;
-  overflow-x: hidden;
-  padding: 20px;
+  max-width: 260px;
+  background-color: #242424;
 }
 
 .mainContainer{
