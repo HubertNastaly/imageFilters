@@ -56,31 +56,43 @@ function filterList() {
   return filterList
 }
 
-function sidebar() {
+function leftSidebar() {
   const sidebar = document.createElement("div")
-  sidebar.classList.add("sidebar")
+  sidebar.classList.add("leftSidebar")
   sidebar.appendChild(filterList())
   sidebar.appendChild(fileMenu())
   return sidebar
 }
 
+function rightSidebar() {
+  const sidebar = document.createElement("div")
+  sidebar.classList.add("rightSidebar")
+  return sidebar
+}
+
+function workspaceElement() {
+  const workspace = document.createElement("div")
+  workspace.classList.add("workspace")
+  workspace.appendChild(WorkSheet.getView())
+  return workspace
+}
+
 function splitSidebarAndWorkspace() {
-  const imageUrl = "https://cors-anywhere.herokuapp.com/https://www.arimr.gov.pl/typo3temp/_processed_/csm_mlody_las_Fotolia_437093127c.jpg"
-  //const imageUrl = "https://cors-anywhere.herokuapp.com/https://www.syfy.com/sites/syfy/files/styles/1200x680_hero/public/2020/01/gandalf.jpg"
+  //const imageUrl = "https://cors-anywhere.herokuapp.com/https://www.arimr.gov.pl/typo3temp/_processed_/csm_mlody_las_Fotolia_437093127c.jpg"
+  const imageUrl = "https://cors-anywhere.herokuapp.com/https://www.syfy.com/sites/syfy/files/styles/1200x680_hero/public/2020/01/gandalf.jpg"
 
   WorkSheet.loadImage(imageUrl)
 
   const mainContainer = document.createElement("div")
   mainContainer.classList.add("mainContainer")
 
-  const side = sidebar()
+  const leftSide = leftSidebar()
+  const rightSide = rightSidebar()
+  const workspace = workspaceElement()
 
-  const workspace = document.createElement("div")
-  workspace.classList.add("workspace")
-  workspace.appendChild(WorkSheet.getView())
-
-  mainContainer.appendChild(side)
+  mainContainer.appendChild(leftSide)
   mainContainer.appendChild(workspace)
+  mainContainer.appendChild(rightSide)
 
   return mainContainer;
 }

@@ -27,9 +27,7 @@ h4{
   border-radius: 10px;
   border-style: none;
   height: 80px;
-  width: 100%;
-  margin-bottom: 10px;
-  flex-shrink: 0;
+  /* flex-shrink: 0; */
   cursor: pointer;
   transform: scale(100%);
   transition: all 0.1s ease-out;
@@ -44,22 +42,31 @@ h4{
 }
 
 .filterList{
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 5px;
+  row-gap: 5px;
   padding: 20px;
   overflow-x: hidden;
   overflow-y: auto;
 }
 
-.sidebar{
+.leftSidebar{
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
+  justify-content: space-between;
   box-sizing: border-box;
   height: 100%;
   width: 90%;
   max-width: 260px;
   background-color: #242424;
+}
+
+.rightSidebar{
+  height: 100%;
+  width: 50px;
+  padding: 5px;
 }
 
 .mainContainer{
@@ -70,6 +77,7 @@ h4{
   align-items: center;
   justify-content: space-between;
   margin: auto 0;
+  overflow: hidden;
 }
 
 .workspace{
@@ -78,4 +86,5 @@ h4{
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: auto;
 }

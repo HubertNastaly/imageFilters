@@ -6,6 +6,7 @@ import { pixelateFragmentShader } from "./shaders/pixelate"
 import { edgeDetectionFragmentShader } from "./shaders/edgeDetection"
 import { posterizeFragmentShader } from "./shaders/posterize"
 import { gradientMapFragmentShader } from "./shaders/gradientMap"
+import { anaglyphFragmentShader } from "./shaders/anaglyph"
 import * as Constants from "./constants"
 import WorkSheet from "./WorkSheet"
 
@@ -16,7 +17,8 @@ export const filterCollection = {
   "Pixelate": pixelateFilter,
   "Edge detection": edgeDetectionFilter,
   "Posterize": posterizeFilter,
-  "Gradient map": gradientMapFilter
+  "Gradient map": gradientMapFilter,
+  "Anaglyph": anaglyphFilter
 }
 
 function invertFilter() {
@@ -126,6 +128,17 @@ function gradientMapFilter() {
   return new PIXI.Filter(
     PIXI.Filter.defaultVertexSrc,
     gradientMapFragmentShader,
+    uniforms
+  );
+}
+
+function anaglyphFilter() {
+  const uniforms = {}
+  uniforms.offset = new Float32Array([5.0, 0.0])
+  uniforms.dimensions = new Float32Array([WorkSheet.pixiApp.renderer.width, WorkSheet.pixiApp.renderer.height])
+  return new PIXI.Filter(
+    PIXI.Filter.defaultVertexSrc,
+    anaglyphFragmentShader,
     uniforms
   );
 }
