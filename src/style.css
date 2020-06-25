@@ -12,32 +12,56 @@ body{
   height: 100%;
 }
 
+button{
+  border-radius: 10px;
+  border-style: none;
+  cursor: pointer;
+}
+
 h4{
   color: white;
   text-shadow: 0 0 5px black;
 }
 
+i{
+  color: white;
+}
+
 .fileMenu{
-  height: 100px;
+  height: 140px;
   flex-shrink: 0;
 }
 
-.filterButton{
-  background-color: tomato;
-  border-radius: 10px;
+.fileMenu > button{
+  height: 50px;
+  width: 100%;
+  background-color: yellowgreen;
+}
+
+.fileMenu > input{
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 2px 10px;
+  box-sizing: border-box;
   border-style: none;
+  border-radius: 10px;
+  background-color: #333333;
+  color:gray;
+  line-height: 20px;
+}
+
+.filterList > button{
+  background-color: tomato;
   height: 80px;
-  /* flex-shrink: 0; */
-  cursor: pointer;
   transform: scale(100%);
   transition: all 0.1s ease-out;
 }
 
-.resetFiltersButton{
+.filterList > button:first-of-type{
   background-color: yellowgreen;
 }
 
-.filterButton:hover{
+.filterList > button:hover{
   transform: scale(90%);
 }
 
@@ -46,7 +70,6 @@ h4{
   grid-template-columns: 1fr 1fr;
   column-gap: 5px;
   row-gap: 5px;
-  padding: 20px;
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -59,14 +82,19 @@ h4{
   box-sizing: border-box;
   height: 100%;
   width: 90%;
-  max-width: 260px;
+  max-width: 200px;
   background-color: #242424;
+}
+
+.leftSidebar > div{
+  padding: 10px;
 }
 
 .rightSidebar{
   height: 100%;
   width: 50px;
   padding: 5px;
+  background-color: #242424;
 }
 
 .mainContainer{

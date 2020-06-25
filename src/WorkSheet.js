@@ -26,6 +26,9 @@ class WorkSheet {
   getView() {
     return this.pixiApp.view
   }
+  getValidUrl(url) {
+    return "https://cors-anywhere.herokuapp.com/" + url
+  }
 }
 
 export default new WorkSheet()

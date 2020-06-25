@@ -1,27 +1,23 @@
 import "./style.css"
-import * as PIXI from "pixi.js"
 import { filterCollection as Filters } from "./filters.js"
-//import * as Constants from "./constants.js"
 import WorkSheet from "./WorkSheet"
 
-// function renderer(imageUrl) {
-
-//   const pixiApp = new PIXI.Application({ backgroundColor: 0x000000 })
-//   pixiApp.loader.add("image", imageUrl)
-//   pixiApp.loader.onComplete.add(() => {
-//     renderer.sprite = PIXI.Sprite.from(pixiApp.loader.resources.image.texture)
-//     pixiApp.renderer.resize(renderer.sprite.width - 1, renderer.sprite.height)
-//     pixiApp.stage.addChild(renderer.sprite)
-//     renderer.sprite.filters = []
-//   })
-//   pixiApp.loader.load()
-
-//   return pixiApp.view
-// }
-
 function fileMenu() {
+
+  const icon = document.createElement("i")
+  icon.classList.add("material-icons")
+  icon.innerHTML = "get_app"
+
+  const downloadButton = document.createElement("button")
+  downloadButton.appendChild(icon)
+
+  const urlInput = document.createElement("input")
+  urlInput.type = "text"
+
   const menu = document.createElement("div")
   menu.classList.add("fileMenu")
+  menu.appendChild(urlInput)
+  menu.appendChild(downloadButton)
 
   return menu
 }
@@ -33,7 +29,6 @@ function filterList() {
   const title = document.createElement("h4")
   title.textContent = "Reset"
   const button = document.createElement("button")
-  button.classList.add("filterButton", "resetFiltersButton")
   button.appendChild(title)
   button.addEventListener("click", () => {
     WorkSheet.sprite.filters = []
@@ -45,7 +40,6 @@ function filterList() {
     title.textContent = filterName
 
     const button = document.createElement("button")
-    button.classList.add("filterButton")
     button.appendChild(title)
     button.addEventListener("click", () => {
       WorkSheet.sprite.filters.push(Filters[filterName]())
@@ -79,7 +73,7 @@ function workspaceElement() {
 
 function splitSidebarAndWorkspace() {
   //const imageUrl = "https://cors-anywhere.herokuapp.com/https://www.arimr.gov.pl/typo3temp/_processed_/csm_mlody_las_Fotolia_437093127c.jpg"
-  const imageUrl = "https://cors-anywhere.herokuapp.com/https://www.syfy.com/sites/syfy/files/styles/1200x680_hero/public/2020/01/gandalf.jpg"
+  const imageUrl = WorkSheet.getValidUrl("https://www.syfy.com/sites/syfy/files/styles/1200x680_hero/public/2020/01/gandalf.jpg")
 
   WorkSheet.loadImage(imageUrl)
 
@@ -98,6 +92,7 @@ function splitSidebarAndWorkspace() {
 }
 
 function init() {
+  document.head.innerHTML += '<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">'
   document.body.appendChild(splitSidebarAndWorkspace())
 }
 
