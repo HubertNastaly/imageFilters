@@ -4,20 +4,17 @@ import WorkSheet from "./WorkSheet"
 
 function fileMenu() {
 
-  const icon = document.createElement("i")
-  icon.classList.add("material-icons")
-  icon.innerHTML = "get_app"
+  // const urlInput = document.createElement("input")
+  // urlInput.type = "text"
 
-  const downloadButton = document.createElement("button")
-  downloadButton.appendChild(icon)
-
-  const urlInput = document.createElement("input")
-  urlInput.type = "text"
+  const label = document.createElement("span")
+  label.textContent = "Source image"
 
   const menu = document.createElement("div")
   menu.classList.add("fileMenu")
-  menu.appendChild(urlInput)
-  menu.appendChild(downloadButton)
+  menu.appendChild(label)
+  menu.appendChild(WorkSheet.urlInput)
+  menu.appendChild(WorkSheet.downloadButton)
 
   return menu
 }
@@ -31,7 +28,7 @@ function filterList() {
   const button = document.createElement("button")
   button.appendChild(title)
   button.addEventListener("click", () => {
-    WorkSheet.sprite.filters = []
+    WorkSheet.reset()
   })
   filterList.appendChild(button)
 
@@ -42,7 +39,7 @@ function filterList() {
     const button = document.createElement("button")
     button.appendChild(title)
     button.addEventListener("click", () => {
-      WorkSheet.sprite.filters.push(Filters[filterName]())
+      WorkSheet.addFilter(Filters[filterName]())
     })
 
     filterList.appendChild(button)
@@ -80,9 +77,9 @@ function splitSidebarAndWorkspace() {
   const mainContainer = document.createElement("div")
   mainContainer.classList.add("mainContainer")
 
+  const workspace = workspaceElement()
   const leftSide = leftSidebar()
   const rightSide = rightSidebar()
-  const workspace = workspaceElement()
 
   mainContainer.appendChild(leftSide)
   mainContainer.appendChild(workspace)
