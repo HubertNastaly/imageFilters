@@ -4,18 +4,24 @@
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
+:root{
+  --primary-color: lightgray;
+  --filter-text-color: white;
+  --text-color: gray;
+  --bg-color: #242424;
+}
+
 html{
   height: 100%;
 }
 
 body{
-  background-color:  #333333;
+  background-color:  var(--bg-color);
   height: 100%;
 }
 
 button, a{
-  color: white;
-  border-radius: 10px;
+  color: var(--filter-text-color);
   border-style: none;
   cursor: pointer;
 }
@@ -25,12 +31,17 @@ h4{
 }
 
 .fileMenu{
-  height: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
   flex-shrink: 0;
 }
 
 .fileMenu > span{
-  color: gray;
+  color: var(--text-color);
+  font-weight: bold;
+  font-size: smaller;
 }
 
 .fileMenu > a{
@@ -39,7 +50,7 @@ h4{
   justify-content: center;
   height: 50px;
   width: 100%;
-  background-color: yellowgreen;
+  background-color: var(--primary-color);
   text-decoration: none;
 }
 
@@ -50,37 +61,63 @@ h4{
   box-sizing: border-box;
   border-style: none;
   border-radius: 10px;
-  background-color: #333333;
-  color:gray;
+  background-color: var(--bg-color);
+  color: var(--text-color);
   line-height: 20px;
 }
 
 .fileMenu input::selection,
 .fileMenu input::-moz-selection{
-  background-color: gray;
-  color: greenyellow;
+  background-color: var(--text-color);
+  color: var(--primary-color);
 }
 
 .filterList > button{
-  background-color: tomato;
   height: 80px;
   transform: scale(100%);
   transition: all 0.1s ease-out;
+  overflow: hidden;
 }
 
 .filterList > button:first-of-type{
-  background-color: yellowgreen;
+  grid-column-end: span 2;
+  background-color: var(--primary-color);
 }
 
-.filterList > button:hover{
+/* .filterList > button:hover{
   transform: scale(90%);
+} */
+
+/* .filterList > button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-image: url("https://ocdn.eu/pulscms-transforms/1/tDnktkpTURBXy9jMGY4YTc3NzgxMjc4NmU0NjU4MjYyMmEwZWJjMjYxMi5qcGeRlQMAPs0H0M0EZQ");
+  background-repeat: no-repeat;
+  background-size: cover;
+  transition: all 0.1s ease-out;
+} */
+
+/* .filterList>button:hover>div{
+  transform: scale(1.2);
 }
+
+.filterList>button>div>h4{
+  transition: all 0.1s ease-out;
+}
+
+.filterList>button:hover>div>h4{
+  transform: translateY(-60px);
+  opacity: 0;
+} */
 
 .filterList{
   display: grid;
   grid-template-columns: 1fr 1fr;
-  column-gap: 5px;
-  row-gap: 5px;
+  column-gap: 10px;
+  row-gap: 10px;
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -94,18 +131,47 @@ h4{
   height: 100%;
   width: 90%;
   max-width: 200px;
-  background-color: #242424;
+  background-color: var(--bg-color);
 }
 
 .leftSidebar > div{
   padding: 10px;
 }
 
+/* stack */
 .rightSidebar{
-  height: 100%;
-  width: 50px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
   padding: 5px;
-  background-color: #242424;
+  height: 100%;
+  width: auto;
+  background-color: var(--bg-color);
+}
+
+/* filter layer */
+.rightSidebar > div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  margin-top: 5px;
+  cursor: pointer;
+}
+
+/* cross */
+.rightSidebar > div > a{
+  color: black;
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+.rightSidebar > div:hover > a{
+  opacity: 0.5;
 }
 
 .mainContainer{

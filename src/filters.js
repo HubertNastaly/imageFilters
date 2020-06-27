@@ -7,18 +7,60 @@ import { edgeDetectionFragmentShader } from "./shaders/edgeDetection"
 import { posterizeFragmentShader } from "./shaders/posterize"
 import { gradientMapFragmentShader } from "./shaders/gradientMap"
 import { anaglyphFragmentShader } from "./shaders/anaglyph"
-import * as Constants from "./constants"
 import WorkSheet from "./WorkSheet"
 
+const palette = {
+  red: "#ff1744",
+  pink: "#f50057",
+  purple: "#d500f9",
+  deepPurple: "#651fff",
+  indigo: "#3d5afe",
+  blue: "#2979ff",
+  lightBlue: "#00b0ff",
+  cyan: "#00e5ff",
+  teal: "#1de9b6",
+  green: "#00e676",
+  lightGreen: "#76ff03",
+  lime: "#c6ff00",
+  yellow: "#ffea00",
+  amber: "#ffc400",
+  orange: "#ff9100",
+  deepOrange: "#ff3d00"
+}
+
 export const filterCollection = {
-  "Invert": invertFilter,
-  "Box blur": boxBlurFilter,
-  "Gaussian blur": gaussianBlurFilter,
-  "Pixelate": pixelateFilter,
-  "Edge detection": edgeDetectionFilter,
-  "Posterize": posterizeFilter,
-  "Gradient map": gradientMapFilter,
-  "Anaglyph": anaglyphFilter
+  "Invert": {
+    filter: invertFilter,
+    color: palette.red
+  },
+  "Box blur": {
+    filter: boxBlurFilter,
+    color: palette.pink
+  },
+  "Gaussian blur": {
+    filter: gaussianBlurFilter,
+    color: palette.purple
+  },
+  "Pixelate": {
+    filter: pixelateFilter,
+    color: palette.deepPurple
+  },
+  "Edge detection": {
+    filter: edgeDetectionFilter,
+    color: palette.indigo
+  },
+  "Posterize": {
+    filter: posterizeFilter,
+    color: palette.blue
+  },
+  "Gradient map": {
+    filter: gradientMapFilter,
+    color: palette.lightBlue
+  },
+  "Anaglyph": {
+    filter: anaglyphFilter,
+    color: palette.cyan
+  }
 }
 
 function invertFilter() {
