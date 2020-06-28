@@ -6,6 +6,7 @@ class WorkSheet {
     this.sprite = null
     this.downloadButton = this.createDownloadButton()
     this.urlInput = this.createUrlInput()
+    this.maxFilters = 30
   }
 
   loadImage(imageUrl) {
@@ -43,6 +44,13 @@ class WorkSheet {
     this.sprite.filters.push(filter)
     this.pixiApp.render()
     this.updateDownloadLink()
+  }
+  canAddFilter() {
+    return this.sprite.filters.length < this.maxFilters
+  }
+  removeFilterAt(idx) {
+    console.log("Remove at " + idx)
+    this.sprite.filters.splice(idx, 1)
   }
   updateDownloadLink() {
     this.downloadButton.href = this.pixiApp.renderer.view.toDataURL()

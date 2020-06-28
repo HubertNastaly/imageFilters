@@ -45,8 +45,6 @@ function filterList() {
     button.style.backgroundColor = Filters[filterName].color
     button.appendChild(title)
     button.addEventListener("click", () => {
-      WorkSheet.addFilter(Filters[filterName].filter())
-
       const deleteButton = document.createElement("a")
       deleteButton.classList.add("material-icons")
       deleteButton.innerHTML = "clear"
@@ -54,9 +52,27 @@ function filterList() {
       const layer = document.createElement("div")
       layer.style.backgroundColor = Filters[filterName].color
       layer.appendChild(deleteButton)
+      layer.addEventListener("click", (e) => {
+        let idx = 0;
+        let node = e.currentTarget
+        console.log(["Current target:", e.currentTarget])
+        console.log(["Node: ", node])
+        console.log(["Next sibling: ", node.nextSibling])
+        while ((node = node.nextSibling) != null)
+          idx++
+        WorkSheet.removeFilterAt(idx)
+        e.currentTarget.parentNode.removeChild(e.currentTarget)
+      }, false)
 
       const stack = document.getElementsByClassName("rightSidebar")[0]
       stack.insertBefore(layer, stack.firstChild)
+
+      if (WorkSheet.canAddFilter()) {
+        WorkSheet.addFilter(Filters[filterName].filter())
+      }
+      else {
+        // message box: cannot add filter
+      }
     })
 
     filterList.appendChild(button)
