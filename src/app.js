@@ -91,6 +91,7 @@ function leftSidebar() {
 function rightSidebar() {
   const sidebar = document.createElement("div")
   sidebar.classList.add("rightSidebar")
+  //add scrolling behaviour on mouse approaching top/bottom of stack
   return sidebar
 }
 

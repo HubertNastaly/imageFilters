@@ -7,6 +7,7 @@ import { edgeDetectionFragmentShader } from "./shaders/edgeDetection"
 import { posterizeFragmentShader } from "./shaders/posterize"
 import { gradientMapFragmentShader } from "./shaders/gradientMap"
 import { anaglyphFragmentShader } from "./shaders/anaglyph"
+import { vignetteFragmentShader } from "./shaders/vignette"
 import WorkSheet from "./WorkSheet"
 
 const palette = {
@@ -60,6 +61,10 @@ export const filterCollection = {
   "Anaglyph": {
     filter: anaglyphFilter,
     color: palette.cyan
+  },
+  "Vignette": {
+    filter: vignetteFilter,
+    color: palette.teal
   }
 }
 
@@ -181,6 +186,17 @@ function anaglyphFilter() {
   return new PIXI.Filter(
     PIXI.Filter.defaultVertexSrc,
     anaglyphFragmentShader,
+    uniforms
+  );
+}
+
+function vignetteFilter() {
+  const uniforms = {}
+  uniforms.radius = 0.4
+  uniforms.dimensions = new Float32Array([WorkSheet.pixiApp.renderer.width, WorkSheet.pixiApp.renderer.height])
+  return new PIXI.Filter(
+    PIXI.Filter.defaultVertexSrc,
+    vignetteFragmentShader,
     uniforms
   );
 }
