@@ -104,7 +104,7 @@ function workspaceElement() {
 
 function splitSidebarAndWorkspace() {
   //const imageUrl = "https://cors-anywhere.herokuapp.com/https://www.arimr.gov.pl/typo3temp/_processed_/csm_mlody_las_Fotolia_437093127c.jpg"
-  const imageUrl = WorkSheet.getValidUrl("https://www.syfy.com/sites/syfy/files/styles/1200x680_hero/public/2020/01/gandalf.jpg")
+  const imageUrl = "https://www.syfy.com/sites/syfy/files/styles/1200x680_hero/public/2020/01/gandalf.jpg"
 
   WorkSheet.loadImage(imageUrl)
 

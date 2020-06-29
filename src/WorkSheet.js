@@ -11,12 +11,12 @@ class WorkSheet {
 
   loadImage(imageUrl) {
     this.urlInput.value = imageUrl
-    this.changeImage(imageUrl)
+    this.changeImage(this.getValidUrl(imageUrl))
   }
   changeImage(imageUrl) {
     const pixiApp = this.pixiApp
     pixiApp.loader.reset()
-    pixiApp.loader.add("image", imageUrl)
+    pixiApp.loader.add("image", this.getValidUrl(imageUrl))
 
     function handleLoad() {
       this.sprite = PIXI.Sprite.from(this.pixiApp.loader.resources.image.texture)
@@ -71,7 +71,7 @@ class WorkSheet {
       e.target.setSelectionRange(0, e.target.value.length)
     })
     urlInput.addEventListener("change", (e) => {
-      this.changeImage(this.getValidUrl(e.target.value))
+      this.changeImage(e.target.value)
     })
 
     return urlInput
