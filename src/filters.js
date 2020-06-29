@@ -9,6 +9,7 @@ import { gradientMapFragmentShader } from "./shaders/gradientMap"
 import { anaglyphFragmentShader } from "./shaders/anaglyph"
 import { vignetteFragmentShader } from "./shaders/vignette"
 import { displaceFragmentShader } from "./shaders/displace"
+import { fogFragmentShader } from "./shaders/fog"
 import WorkSheet from "./WorkSheet"
 
 const palette = {
@@ -70,6 +71,10 @@ export const filterCollection = {
   "Displace": {
     filter: displaceFilter,
     color: palette.green
+  },
+  "Fog": {
+    filter: fogFilter,
+    color: palette.lightGreen
   }
 }
 
@@ -208,17 +213,19 @@ function vignetteFilter() {
 
 function displaceFilter() {
   const uniforms = {}
-  // uniforms.offset = new Float32Array(
-  //   [-10.0, -10.0, -5.0, -10.0, 0.0, -10.0, 5.0, -10.0, 10.0, -10.0,
-  //   -10.0, -5.0, -5.0, -5.0, 0.0, -5.0, 5.0, -5.0, 10.0, -5.0,
-  //   -10.0, 0.0, -5.0, 0.0, 0.0, 0.0, 5.0, 0.0, 10.0, 0.0,
-  //   -10.0, 5.0, -5.0, 5.0, 0.0, 5.0, 5.0, 5.0, 10.0, 5.0,
-  //   -10.0, 10.0, -5.0, 10.0, 0.0, 10.0, 5.0, 10.0, 10.0, 10.0]
-  // )
   uniforms.dimensions = new Float32Array([WorkSheet.pixiApp.renderer.width, WorkSheet.pixiApp.renderer.height])
   return new PIXI.Filter(
     PIXI.Filter.defaultVertexSrc,
     displaceFragmentShader,
+    uniforms
+  );
+}
+
+function fogFilter() {
+  const uniforms = {}
+  return new PIXI.Filter(
+    PIXI.Filter.defaultVertexSrc,
+    fogFragmentShader,
     uniforms
   );
 }

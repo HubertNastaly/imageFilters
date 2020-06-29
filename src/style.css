@@ -37,7 +37,7 @@ button, a{
   cursor: pointer;
 }
 
-button:hover, a:hover{
+button:hover{
   box-shadow: inset 0 -5px 0 white;
 }
 
@@ -85,26 +85,25 @@ button:hover, a:hover{
 }
 
 .filterList > button{
-  height: 80px;
-  transform: scale(100%);
+  height: 50px;
+  width: 100%;
+  margin-bottom: 5px;
   transition: all 0.1s ease-out;
   overflow: hidden;
 }
 
 .filterList > button:first-of-type{
-  grid-column-end: span 2;
+  /* grid-column-end: span 2; */
   background-color: var(--primary-color);
 }
 
-/* .filterList > button:hover{
-  box-shadow: inset 0 -10px 0 white;
-} */
-
 .filterList{
-  display: grid;
+  /* display: grid;
   grid-template-columns: 1fr 1fr;
   column-gap: 10px;
-  row-gap: 10px;
+  row-gap: 10px; */
+  display: flex;
+  flex-direction: column;
   overflow-x: hidden;
   overflow-y: auto;
 }
