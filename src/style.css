@@ -85,7 +85,7 @@ button:hover{
 }
 
 .filterList > button{
-  height: 50px;
+  height: 30px;
   width: 100%;
   margin-bottom: 5px;
   transition: all 0.1s ease-out;
@@ -93,17 +93,10 @@ button:hover{
 }
 
 .filterList > button:first-of-type{
-  /* grid-column-end: span 2; */
   background-color: var(--primary-color);
 }
 
 .filterList{
-  /* display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 10px;
-  row-gap: 10px; */
-  display: flex;
-  flex-direction: column;
   overflow-x: hidden;
   overflow-y: auto;
 }
