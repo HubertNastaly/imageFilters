@@ -42,7 +42,7 @@ function filterList() {
   button.appendChild(title)
   button.addEventListener("click", () => {
     WorkSheet.reset()
-    document.getElementsByClassName("layersPanel")[0].innerHTML = ""
+    document.querySelector(".layersPanelWrapper > div").innerHTML = ""
   })
   filterList.appendChild(button)
 

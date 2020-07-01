@@ -134,8 +134,9 @@ button:hover{
 
 /* stack */
 .layersPanelWrapper > div{
+  height: var(--layer-label-size);
   flex-basis: var(--layer-label-size);
-  width: 100%;
+  padding-bottom: 5px;
 
   display: flex;
   flex-direction: row;
@@ -148,6 +149,7 @@ button:hover{
 .layersPanelWrapper{
   overflow-y: hidden;
   overflow-x: auto;
+  width: 100%;
 }
 
 /* filter layer */
@@ -174,7 +176,7 @@ button:hover{
   transform: scale(0.8);
 }
 
-.layersPanel > div:hover > a{
+.layersPanelWrapper > div > div:hover > a{
   opacity: 0.5;
 }
 
