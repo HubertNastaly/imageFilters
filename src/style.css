@@ -135,8 +135,6 @@ button:hover{
 /* stack */
 .layersPanelWrapper > div{
   height: var(--layer-label-size);
-  flex-basis: var(--layer-label-size);
-  padding-bottom: 5px;
 
   display: flex;
   flex-direction: row;
@@ -147,9 +145,12 @@ button:hover{
 }
 
 .layersPanelWrapper{
+  flex-shrink: 0;
+  /* flex-basis: var(--layer-label-size); */
   overflow-y: hidden;
   overflow-x: auto;
   width: 100%;
+  margin-top: 10px;
 }
 
 /* filter layer */
@@ -160,8 +161,6 @@ button:hover{
 
   max-width: var(--layer-label-size);
   max-height: var(--layer-label-size);
-  /* min-width: 0;
-  min-height: 0; */
 
   border-radius: 50%;
   margin-right: 5px;
@@ -228,4 +227,5 @@ button:hover{
 .workspace > canvas{
   margin: auto 0;
   max-width: 100%;
+  min-height: 0;
 }
