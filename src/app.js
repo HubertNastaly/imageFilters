@@ -42,7 +42,7 @@ function filterList() {
   button.appendChild(title)
   button.addEventListener("click", () => {
     WorkSheet.reset()
-    document.getElementsByClassName("rightSidebar")[0].innerHTML = ""
+    document.getElementsByClassName("layersPanel")[0].innerHTML = ""
   })
   filterList.appendChild(button)
 
@@ -70,15 +70,15 @@ function filterList() {
       layer.addEventListener("click", (e) => {
         let idx = 0;
         let node = e.currentTarget
-        while ((node = node.nextSibling) != null)
+        while ((node = node.previousSibling) != null)
           idx++
         WorkSheet.removeFilterAt(idx)
         e.currentTarget.parentNode.removeChild(e.currentTarget)
       }, false)
 
       if (WorkSheet.canAddFilter()) {
-        const stack = document.getElementsByClassName("rightSidebar")[0]
-        stack.insertBefore(layer, stack.firstChild)
+        const stack = document.querySelector(".layersPanelWrapper > div")
+        stack.appendChild(layer)
         WorkSheet.addFilter(Filters[filterName].filter())
       }
       else {
@@ -108,11 +108,12 @@ function leftSidebar() {
   return sidebar
 }
 
-function rightSidebar() {
+function layersPanel() {
   const sidebar = document.createElement("div")
-  sidebar.classList.add("rightSidebar")
-  //add scrolling behaviour on mouse approaching top/bottom of stack
-  return sidebar
+  const scrollWrapper = document.createElement("div")
+  scrollWrapper.appendChild(sidebar)
+  scrollWrapper.classList.add("layersPanelWrapper")
+  return scrollWrapper
 }
 
 function workspaceElement() {
@@ -120,6 +121,7 @@ function workspaceElement() {
   workspace.classList.add("workspace")
   workspace.appendChild(WorkSheet.getView())
   workspace.appendChild(warningModal())
+  workspace.appendChild(layersPanel())
   return workspace
 }
 
@@ -142,11 +144,9 @@ function splitSidebarAndWorkspace() {
 
   const workspace = workspaceElement()
   const leftSide = leftSidebar()
-  const rightSide = rightSidebar()
 
   mainContainer.appendChild(leftSide)
   mainContainer.appendChild(workspace)
-  mainContainer.appendChild(rightSide)
 
   return mainContainer;
 }

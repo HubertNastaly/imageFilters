@@ -49,7 +49,6 @@ class WorkSheet {
     return this.sprite.filters.length < this.maxFilters
   }
   removeFilterAt(idx) {
-    console.log("Remove at " + idx)
     this.sprite.filters.splice(idx, 1)
   }
   updateDownloadLink() {
