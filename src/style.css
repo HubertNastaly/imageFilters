@@ -98,6 +98,7 @@ button:hover{
 }
 
 .filterList{
+  flex: 1;
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -127,7 +128,7 @@ button:hover{
   color: var(--light-text-color);
 }
 
-.leftSidebar > div > span{
+.leftSidebar > div:first-of-type > span{
   font-variant-caps: all-petite-caps;
 }
 

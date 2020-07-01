@@ -31,7 +31,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: "Webpack Output",
+      title: "Stack Up",
     }),
   ],
 };
