@@ -2,6 +2,20 @@ import "./style.css"
 import { filterCollection as Filters } from "./filters.js"
 import WorkSheet from "./WorkSheet"
 
+function logoSection() {
+
+  const title = document.createElement("h1")
+  title.textContent = "Stack Up"
+  const tagline = document.createElement("span")
+  tagline.textContent = "Simple photo editor"
+
+  const wrapper = document.createElement("div")
+  wrapper.appendChild(title)
+  wrapper.appendChild(tagline)
+
+  return wrapper
+}
+
 function fileMenu() {
 
   const label = document.createElement("span")
@@ -41,7 +55,9 @@ function filterList() {
     const button = document.createElement("button")
     button.style.backgroundColor = Filters[filterName].color
     button.appendChild(title)
+
     button.addEventListener("click", () => {
+
       const deleteButton = document.createElement("a")
       deleteButton.classList.add("material-icons")
       deleteButton.innerHTML = "clear"
@@ -76,7 +92,7 @@ function filterList() {
 }
 
 function showModal() {
-  const modal = document.getElementsByClassName("modal")[0]
+  const modal = document.getElementsByClassName("info")[0]
   modal.classList.remove("invisible")
   window.setTimeout(() => {
     modal.classList.add("invisible")
@@ -86,6 +102,7 @@ function showModal() {
 function leftSidebar() {
   const sidebar = document.createElement("div")
   sidebar.classList.add("leftSidebar")
+  sidebar.appendChild(logoSection())
   sidebar.appendChild(filterList())
   sidebar.appendChild(fileMenu())
   return sidebar
@@ -108,7 +125,7 @@ function workspaceElement() {
 
 function warningModal() {
   const modal = document.createElement("div")
-  modal.classList.add("modal", "invisible")
+  modal.classList.add("info", "invisible")
   const info = document.createElement("span")
   info.textContent = "Image can only have up to " + WorkSheet.maxFilters + " layers"
   modal.appendChild(info)

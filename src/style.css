@@ -17,7 +17,7 @@
 
 :root{
   --primary-color: #303030;
-  --filter-text-color: white;
+  --light-text-color: white;
   --text-color: gray;
   --bg-color: #242424;
   font-size: 14px;
@@ -34,7 +34,7 @@ body{
 }
 
 button, a{
-  color: var(--filter-text-color);
+  color: var(--light-text-color);
   border-style: none;
   cursor: pointer;
 }
@@ -114,8 +114,21 @@ button:hover{
   background-color: var(--bg-color);
 }
 
+/* logo, filters list, file menu */
 .leftSidebar > div{
   padding: 10px;
+}
+
+.leftSidebar > div:first-of-type{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: bold;
+  color: var(--light-text-color);
+}
+
+.leftSidebar > div > span{
+  font-variant-caps: all-petite-caps;
 }
 
 /* stack */
@@ -125,7 +138,7 @@ button:hover{
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  padding: 5px;
+  padding: 10px;
   height: 100%;
   width: auto;
   overflow-y: hidden;
@@ -158,7 +171,7 @@ button:hover{
   opacity: 0.5;
 }
 
-.modal{
+.info{
   position: fixed;
   top: 0;
   z-index: 3;
