@@ -1,7 +1,6 @@
 import * as PIXI from "pixi.js"
 import { invertFragmentShader } from "./shaders/invert"
-import { boxBlurFragmentShader } from "./shaders/boxBlur"
-import { gaussianBlurFragmentShader } from "./shaders/gaussianBlur"
+import { blurFragmentShader } from "./shaders/blur"
 import { pixelateFragmentShader } from "./shaders/pixelate"
 import { edgeDetectionFragmentShader } from "./shaders/edgeDetection"
 import { posterizeFragmentShader } from "./shaders/posterize"
@@ -36,13 +35,9 @@ export const filterCollection = {
     filter: invertFilter,
     color: palette.red
   },
-  "Box blur": {
-    filter: boxBlurFilter,
+  "Blur": {
+    filter: blurFilter,
     color: palette.pink
-  },
-  "Gaussian blur": {
-    filter: gaussianBlurFilter,
-    color: palette.purple
   },
   "Pixelate": {
     filter: pixelateFilter,
@@ -54,27 +49,27 @@ export const filterCollection = {
   },
   "Posterize": {
     filter: posterizeFilter,
-    color: palette.blue
+    color: palette.lightBlue
   },
   "Gradient map": {
     filter: gradientMapFilter,
-    color: palette.lightBlue
+    color: palette.teal
   },
   "Anaglyph": {
     filter: anaglyphFilter,
-    color: palette.cyan
+    color: palette.green
   },
   "Vignette": {
     filter: vignetteFilter,
-    color: palette.teal
+    color: palette.lightGreen
   },
   "Displace": {
     filter: displaceFilter,
-    color: palette.green
+    color: palette.yellow
   },
   "Fog": {
     filter: fogFilter,
-    color: palette.lightGreen
+    color: palette.amber
   }
 }
 
@@ -87,22 +82,7 @@ function invertFilter() {
   );
 }
 
-function boxBlurFilter() {
-  const uniforms = {}
-  uniforms.offset = new Float32Array(
-    [-1.0, -1.0, 0.0, -1.0, 1.0, -1.0,
-    -1.0, 0.0, 0.0, 0.0, 1.0, 0.0,
-    -1.0, 1.0, 0.0, 1.0, 1.0, 1.0]
-  )
-  uniforms.dimensions = new Float32Array([WorkSheet.pixiApp.renderer.width, WorkSheet.pixiApp.renderer.height])
-  return new PIXI.Filter(
-    PIXI.Filter.defaultVertexSrc,
-    boxBlurFragmentShader,
-    uniforms
-  );
-}
-
-function gaussianBlurFilter() {
+function blurFilter() {
   const uniforms = {}
   uniforms.offset = new Float32Array(
     [-2.0, -2.0, -1.0, -2.0, 0.0, -2.0, 1.0, -2.0, 2.0, -2.0,
@@ -121,7 +101,7 @@ function gaussianBlurFilter() {
   uniforms.dimensions = new Float32Array([WorkSheet.pixiApp.renderer.width, WorkSheet.pixiApp.renderer.height])
   return new PIXI.Filter(
     PIXI.Filter.defaultVertexSrc,
-    gaussianBlurFragmentShader,
+    blurFragmentShader,
     uniforms
   );
 }

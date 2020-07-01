@@ -20,6 +20,7 @@
   --filter-text-color: white;
   --text-color: gray;
   --bg-color: #242424;
+  font-size: 14px;
 }
 
 html{
@@ -27,7 +28,8 @@ html{
 }
 
 body{
-  background-color:  var(--bg-color);
+  position: relative;
+  background-color: var(--bg-color);
   height: 100%;
 }
 
@@ -52,7 +54,6 @@ button:hover{
 .fileMenu > span{
   color: var(--text-color);
   font-weight: bold;
-  font-size: smaller;
 }
 
 /* download button */
@@ -75,7 +76,7 @@ button:hover{
   border-style: none;
   background-color: var(--primary-color);
   color: var(--text-color);
-  line-height: 20px;
+  line-height: 1.4rem;
 }
 
 .fileMenu input::selection,
@@ -155,6 +156,28 @@ button:hover{
 
 .rightSidebar > div:hover > a{
   opacity: 0.5;
+}
+
+.modal{
+  position: fixed;
+  top: 0;
+  z-index: 3;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 30px;
+  box-sizing: border-box;
+
+  color: white;
+  background-color: var(--bg-color);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+
+  transition: all 1s linear;
+}
+
+.invisible{
+  opacity: 0;
 }
 
 .mainContainer{

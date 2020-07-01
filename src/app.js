@@ -4,9 +4,6 @@ import WorkSheet from "./WorkSheet"
 
 function fileMenu() {
 
-  // const urlInput = document.createElement("input")
-  // urlInput.type = "text"
-
   const label = document.createElement("span")
   label.textContent = "Source image"
 
@@ -49,35 +46,41 @@ function filterList() {
       deleteButton.classList.add("material-icons")
       deleteButton.innerHTML = "clear"
 
+      //layer button on right side
       const layer = document.createElement("div")
+      layer.title = filterName
       layer.style.backgroundColor = Filters[filterName].color
       layer.appendChild(deleteButton)
       layer.addEventListener("click", (e) => {
         let idx = 0;
         let node = e.currentTarget
-        console.log(["Current target:", e.currentTarget])
-        console.log(["Node: ", node])
-        console.log(["Next sibling: ", node.nextSibling])
         while ((node = node.nextSibling) != null)
           idx++
         WorkSheet.removeFilterAt(idx)
         e.currentTarget.parentNode.removeChild(e.currentTarget)
       }, false)
 
-      const stack = document.getElementsByClassName("rightSidebar")[0]
-      stack.insertBefore(layer, stack.firstChild)
-
       if (WorkSheet.canAddFilter()) {
+        const stack = document.getElementsByClassName("rightSidebar")[0]
+        stack.insertBefore(layer, stack.firstChild)
         WorkSheet.addFilter(Filters[filterName].filter())
       }
       else {
-        // message box: cannot add filter
+        showModal()
       }
     })
 
     filterList.appendChild(button)
   })
   return filterList
+}
+
+function showModal() {
+  const modal = document.getElementsByClassName("modal")[0]
+  modal.classList.remove("invisible")
+  window.setTimeout(() => {
+    modal.classList.add("invisible")
+  }, 3000)
 }
 
 function leftSidebar() {
@@ -99,11 +102,20 @@ function workspaceElement() {
   const workspace = document.createElement("div")
   workspace.classList.add("workspace")
   workspace.appendChild(WorkSheet.getView())
+  workspace.appendChild(warningModal())
   return workspace
 }
 
+function warningModal() {
+  const modal = document.createElement("div")
+  modal.classList.add("modal", "invisible")
+  const info = document.createElement("span")
+  info.textContent = "Image can only have up to " + WorkSheet.maxFilters + " layers"
+  modal.appendChild(info)
+  return modal
+}
+
 function splitSidebarAndWorkspace() {
-  //const imageUrl = "https://cors-anywhere.herokuapp.com/https://www.arimr.gov.pl/typo3temp/_processed_/csm_mlody_las_Fotolia_437093127c.jpg"
   const imageUrl = "https://www.syfy.com/sites/syfy/files/styles/1200x680_hero/public/2020/01/gandalf.jpg"
 
   WorkSheet.loadImage(imageUrl)

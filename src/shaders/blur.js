@@ -1,4 +1,4 @@
-export const gaussianBlurFragmentShader = `
+export const blurFragmentShader = `
 #if __VERSION__ < 130
 #define TEXTURE2D texture2D
 #else

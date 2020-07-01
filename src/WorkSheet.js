@@ -6,7 +6,7 @@ class WorkSheet {
     this.sprite = null
     this.downloadButton = this.createDownloadButton()
     this.urlInput = this.createUrlInput()
-    this.maxFilters = 30
+    this.maxFilters = 20
   }
 
   loadImage(imageUrl) {
