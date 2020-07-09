@@ -22,6 +22,7 @@
   --bg-color: #242424;
   --layer-label-size: 20px;
   font-size: 14px;
+  box-sizing: border-box;
 }
 
 html{
@@ -58,11 +59,13 @@ button:hover{
 
 /* download button */
 .fileMenu > a{
+  height: 50px;
+  width: 100%;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 50px;
-  width: 100%;
+  
   background-color: var(--primary-color);
   text-decoration: none;
   transition: all 0.1s ease-out;
@@ -70,9 +73,10 @@ button:hover{
 
 .fileMenu > input{
   width: 100%;
-  margin-bottom: 10px;
+
   padding: 2px 4px;
-  box-sizing: border-box;
+  margin-bottom: 10px;
+  
   border-style: none;
   background-color: var(--primary-color);
   color: var(--text-color);
@@ -89,8 +93,8 @@ button:hover{
   height: 30px;
   width: 100%;
   margin-bottom: 5px;
-  transition: all 0.1s ease-out;
   overflow: hidden;
+  transition: all 0.1s ease-out;
 }
 
 .filterList > button:first-of-type{
@@ -104,14 +108,15 @@ button:hover{
 }
 
 .leftSidebar{
-  display: flex;
-  flex-direction: column;
-  flex-shrink: 0;
-  justify-content: space-between;
-  box-sizing: border-box;
   height: 100%;
   width: 90%;
   max-width: 200px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-shrink: 0;
+  
   background-color: var(--bg-color);
 }
 
@@ -124,6 +129,7 @@ button:hover{
   display: flex;
   flex-direction: column;
   align-items: center;
+
   font-weight: bold;
   color: var(--light-text-color);
 }
@@ -145,25 +151,27 @@ button:hover{
 }
 
 .layersPanelWrapper{
+  width: 100%;
+
   flex-shrink: 0;
-  /* flex-basis: var(--layer-label-size); */
+  margin-top: 10px;
+
   overflow-y: hidden;
   overflow-x: auto;
-  width: 100%;
-  margin-top: 10px;
 }
 
 /* filter layer */
 .layersPanelWrapper > div > div{
+  max-width: var(--layer-label-size);
+  max-height: var(--layer-label-size);
+
   display: flex;
   align-items: center;
   justify-content: center;
 
-  max-width: var(--layer-label-size);
-  max-height: var(--layer-label-size);
+  margin-right: 5px;
 
   border-radius: 50%;
-  margin-right: 5px;
   cursor: pointer;
   animation: drop 0.2s cubic-bezier(.1,.92,.79,1.32);
 }
@@ -181,14 +189,14 @@ button:hover{
 
 .info{
   position: fixed;
-  top: 0;
   z-index: 3;
+  top: 0;
 
   display: flex;
   align-items: center;
   justify-content: center;
+
   padding: 20px 30px;
-  box-sizing: border-box;
 
   color: white;
   background-color: var(--bg-color);
@@ -204,10 +212,12 @@ button:hover{
 .mainContainer{
   width: 100%;
   height: 100%;
+
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+
   margin: auto 0;
   overflow: hidden;
 }
@@ -215,17 +225,18 @@ button:hover{
 .workspace{
   height: 100%;
   width: 100%;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+
   padding: 10px 10px 10px 0;
-  box-sizing: border-box;
   overflow: hidden;
 }
 
 .workspace > canvas{
-  margin: auto 0;
   max-width: 100%;
   min-height: 0;
+  margin: auto 0;
 }
